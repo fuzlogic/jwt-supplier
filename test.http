@@ -1,0 +1,58 @@
+
+GET http://localhost:9000/api/v1/other/healthcheck
+
+###
+
+POST http://localhost:9000/api/v1/auth/signup
+Content-Type: application/json
+
+{
+  "username": "user3",
+  "password": "password3",
+  "email": "user3@email"
+}
+
+###
+
+POST http://localhost:9000/api/v1/auth/signin
+Content-Type: application/json
+
+{
+        "username": "user3",
+        "password": "password3"
+}
+
+> {%
+    client.global.set("auth_token", response.body.token);
+%}
+
+###
+
+GET http://localhost:9000/api/v1/auth/welcome
+Content-Type: application/json
+
+{
+        "token": "{{auth_token}}"
+}
+
+###
+
+POST http://localhost:9000/api/v1/auth/refresh
+Content-Type: application/json
+
+{
+        "token": "{{auth_token}}"
+}
+
+> {%
+    client.global.set("auth_token", response.body.token);
+%}
+
+###
+
+POST http://localhost:9000/api/v1/auth/delete
+Content-Type: application/json
+
+{
+        "token": "{{auth_token}}"
+}

@@ -1,0 +1,162 @@
+basePath: /api/v1
+definitions:
+  auth.ClaimData:
+    properties:
+      token:
+        type: string
+    type: object
+  auth.Credentials:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  auth.Register:
+    properties:
+      email:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  auth.TokenData:
+    properties:
+      expiration:
+        type: string
+      token:
+        type: string
+    type: object
+info:
+  contact:
+    email: roman@kasovsky.ru
+    name: Roman Kasovsky
+  description: Swagger API for Auth Blueprint.
+  license:
+    name: Apache-2.0
+    url: https://directory.fsf.org/wiki/License:Apache-2.0
+  termsOfService: http://swagger.io/terms/
+  title: Auth Blueprint Swagger API
+  version: "1.0"
+paths:
+  /auth/delete:
+    post:
+      consumes:
+      - application/json
+      description: Delete Description
+      parameters:
+      - description: Credentials
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/auth.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Delete Summary
+      tags:
+      - auth
+  /auth/refresh:
+    post:
+      consumes:
+      - application/json
+      description: Refresh Description
+      parameters:
+      - description: Credentials
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/auth.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.TokenData'
+      summary: Refresh Summary
+      tags:
+      - auth
+  /auth/signin:
+    post:
+      consumes:
+      - application/json
+      description: Signin Description
+      parameters:
+      - description: Credentials
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/auth.Credentials'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/auth.TokenData'
+      summary: Signin Summary
+      tags:
+      - auth
+  /auth/signup:
+    post:
+      consumes:
+      - application/json
+      description: Signup Description
+      parameters:
+      - description: Register
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/auth.Register'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ""
+      summary: Signup Summary
+      tags:
+      - auth
+  /auth/welcome:
+    get:
+      consumes:
+      - application/json
+      description: Welcome Description
+      parameters:
+      - description: Credentials
+        in: body
+        name: id
+        required: true
+        schema:
+          $ref: '#/definitions/auth.ClaimData'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: Welcome Summary
+      tags:
+      - auth
+  /other/healthcheck:
+    get:
+      description: HealthCheck Description
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            type: string
+      summary: HealthCheck Summary
+      tags:
+      - other
+swagger: "2.0"
